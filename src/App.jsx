@@ -3,6 +3,7 @@ import Navbar from "./ui/Navbar";
 import Dashboard from "./pages/Dashboard";
 import ViewVideo from "./pages/ViewVideo";
 import Upload from "./pages/Upload";
+import "./index.css";
 
 export default function App() {
   return (
@@ -10,7 +11,7 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/view/:id" element={<ViewVideo />} />
+        <Route path="/view/:lecName" element={<ViewVideo />} />
         <Route path="/upload" element={<Upload />} />
       </Routes>
     </Router>
