@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   CardMedia,
+  CircularProgress,
   Grid,
   TextField,
   Typography,
@@ -43,7 +44,9 @@ export default function Dashboard() {
             onChange={(e) => setQuery(e.target.value)}
           />
           {isLoading ? (
-            <p>Loading...</p>
+            <Box justifySelf={"center"}>
+              <CircularProgress />
+            </Box>
           ) : isError ? (
             <p>Error loading lectures</p>
           ) : lectures.length === 0 ? (

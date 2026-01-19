@@ -1,16 +1,89 @@
-# React + Vite
+# Lectura
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Lectura is a web platform for professors to upload lecture videos and generate learning materials with AI. After upload, the system produces a time-synced transcript, a concise summary, and an automatically generated quiz.
 
-Currently, two official plugins are available:
+This repository contains the React front-end built with Vite.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
 
-## React Compiler
+Lectura focuses on a simple workflow:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Upload a lecture video and associate it with a class.
+2. The lecture is processed in the background.
+3. Browse and search uploaded lectures on the dashboard.
+4. Open a lecture to watch the video alongside a synchronized transcript, then review the AI summary and take the quiz.
 
-## Expanding the ESLint configuration
+## Key features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Lecture uploads**
+  - Upload `.mp4` lectures
+  - Optionally rename the lecture before uploading
+  - Assign the lecture to a class
+
+- **Lecture dashboard**
+  - Search lectures by name
+  - See processing status (lectures remain unavailable until processing completes)
+
+- **Lecture viewer**
+  - Built-in video player
+  - Time-synced transcript that highlights the current segment while the video plays
+  - Click any transcript segment to jump the video to that timestamp
+  - AI-generated summary
+  - Auto-generated quiz with scoring and retry
+
+- **UI**
+  - Material UI (MUI) component library
+  - Responsive layout and consistent styling
+
+## Tech stack
+
+- React + Vite
+- Material UI (MUI) + MUI Lab (LoadingButton)
+- React Router
+- TanStack Query (React Query) for data fetching, caching, and invalidation
+- Custom hooks for API integration (examples used by the UI):
+  - `useSearchVideos(query)`
+  - `usePresignedUpload()`
+  - `useGetVideoData(lectureName)`
+
+## Local development
+
+### Prerequisites
+
+- Node.js (LTS recommended)
+- npm
+
+### Setup
+
+```bash
+npm install
+npm run dev
+```
+
+Vite will print the local dev server URL in your terminal (typically `http://localhost:5173`).
+
+## Application routes
+
+- `/` — Dashboard (browse/search lectures)
+- `/upload` — Upload a new lecture
+- `/view/:lectureName` — View a lecture (video, transcript, summary, quiz)
+
+## Project layout (high level)
+
+- `pages/`
+  - `Dashboard` — lecture listing + search
+  - `Upload` — upload form + class selection
+  - `ViewVideo` — video player + transcript + summary + quiz
+- `components/`
+  - `Navbar` — primary navigation
+  - `Quiz` — quiz renderer (scoring + retry)
+- `hooks/`
+  - API integration hooks (React Query)
+
+## Roadmap ideas
+
+- Class management backed by persisted data (instead of a local list)
+- Transcript search and filtering
+- Downloadable transcript/summary exports (PDF/Markdown)
+- Basic analytics (watch progress, quiz attempts)
+- Role-based access (professor vs student views)

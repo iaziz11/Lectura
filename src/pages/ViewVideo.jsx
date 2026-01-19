@@ -214,7 +214,7 @@ export default function ViewVideo() {
 
   function handleClickTranscriptEl(idx) {
     videoRef.current.currentTime = Number(
-      videoData?.transcript[idx].start_time
+      videoData?.transcript[idx].start_time,
     );
     setTranscriptIndex(idx);
   }
@@ -224,6 +224,7 @@ export default function ViewVideo() {
       lineRefs.current[transcriptIndex].scrollIntoView({
         behavior: "smooth",
         block: "center",
+        container: "nearest",
       });
     }
   }, [transcriptIndex]);
@@ -251,9 +252,9 @@ export default function ViewVideo() {
         {videoData?.itemName.replaceAll("_", " ")}
       </Typography>
 
-      <Box sx={{ maxWidth: "1200px", mx: "auto", px: 2 }}>
+      <Box sx={{ maxWidth: "1500px", mx: "auto", px: 2 }}>
         {/* Video + Transcript */}
-        <Grid container spacing={3}>
+        <Grid container direction={"row"} spacing={3} alignItems={"center"}>
           {/* Video */}
           <Grid item xs={12} md={8}>
             <Paper
@@ -283,6 +284,7 @@ export default function ViewVideo() {
             <Paper
               elevation={3}
               sx={{
+                maxWidth: "500px",
                 height: "480px",
                 borderRadius: 3,
                 p: 2,
@@ -319,6 +321,7 @@ export default function ViewVideo() {
                         borderRadius: 2,
                         cursor: "pointer",
                         fontSize: "0.9rem",
+
                         lineHeight: 1.4,
                         bgcolor: active ? "primary.light" : "grey.50",
                         color: active ? "primary.contrastText" : "text.primary",
@@ -356,9 +359,7 @@ export default function ViewVideo() {
           <Typography variant="h6" fontWeight={600} sx={{ mb: 1 }}>
             Summary
           </Typography>
-          <Typography color="text.secondary">
-            {videoData?.summaryText}
-          </Typography>
+          <Typography color="text.primary">{videoData?.summaryText}</Typography>
         </Paper>
 
         {/* Quiz */}

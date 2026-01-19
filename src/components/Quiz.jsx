@@ -75,31 +75,27 @@ export default function Quiz({ quiz }) {
         </Box>
       ))}
 
-      {!submitted ? (
-        <Button
-          variant="contained"
-          fullWidth
-          sx={{ mt: 2, backgroundColor: "#3b7aa5" }}
-          onClick={handleSubmit}
-        >
-          Submit Quiz
-        </Button>
-      ) : (
-        <>
-          <Typography variant="h6" sx={{ mt: 2, textAlign: "center" }}>
-            Score: {score} / {quiz.length}
-          </Typography>
-
+      <Box justifySelf={"center"}>
+        {!submitted ? (
           <Button
-            variant="outlined"
-            fullWidth
-            sx={{ mt: 2 }}
-            onClick={handleRetry}
+            variant="contained"
+            sx={{ mt: 2, backgroundColor: "#3b7aa5" }}
+            onClick={handleSubmit}
           >
-            Retry Quiz
+            Submit Quiz
           </Button>
-        </>
-      )}
+        ) : (
+          <>
+            <Typography variant="h6" sx={{ mt: 2, textAlign: "center" }}>
+              Score: {score} / {quiz.length}
+            </Typography>
+
+            <Button variant="outlined" sx={{ mt: 2 }} onClick={handleRetry}>
+              Retry Quiz
+            </Button>
+          </>
+        )}
+      </Box>
     </Box>
   );
 }
